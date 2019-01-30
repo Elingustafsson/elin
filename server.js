@@ -23,6 +23,10 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+app.get('/game', function(req, res) {
+    res.sendFile(path.join(__dirname + '/client/game/snakeGame.html'));
+});
+
 //skicka posts om någon frågar efter /getPosts
 app.get('/getPosts', function(req, res) {
     res.send(posts);
