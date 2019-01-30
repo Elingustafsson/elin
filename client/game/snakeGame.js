@@ -1,3 +1,30 @@
+getData();
+
+function getData() {
+  var request = new XMLHttpRequest();
+  //Skicka en getrequest till /getScore, jag har definerat denna route i server.js
+  request.open("GET", '/getScore');
+  request.send();
+
+  //DETTA ÄR DET DU BEHÖVER BRY DIG OM
+  //denna funktion körs när servern har svarat, och svaret hamnar i request.response;
+  request.onload = function(e) {
+    var response = request.response;
+
+  }
+}
+
+function sendScore(highScore) {
+  console.log("från sendScore", highScore);
+var request2 = new XMLHttpRequest();
+request2.open("POST", '/sendScoreData');
+request2.setRequestHeader("Content-Type", "application/json");
+//VI KAN BARA SKICKA STRINGS, SÅ GÖR OM OBJEKTET TILL EN STRING, OCH SKICKA ÖVER STRINGEN
+//HÄMTA RÄTT INFO och skicka till SERVERN
+request2.send(JSON.stringify(highScore));
+}
+
+
 var dimension = 10;
 var gameOn = false;
 var direction = null;
@@ -9,9 +36,6 @@ var highScore = [];
 var name = "";
 var nameHighScore = [];
 
-
-// spara name med score i highScore[som obj med varsin key]
-// Displaya score och name efter highscore
 
 createTable(dimension);
 initialize(dimension);
@@ -97,6 +121,7 @@ function resetGame() {
   var food = document.getElementById("cell" + currentFood.x + currentFood.y);
   food.style.backgroundColor = 'white';
   initialize(dimension)
+  sendScore(highScore)
 }
 
 function checkIfLose() {

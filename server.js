@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 var posts = [];
 var dates = ['2018/1/3', '2018/2/8', '2018/4/9'];
 var amounts = [3,4,1];
+var score = [];
 
 //skicka index.html om någon frågar efter /
 app.get('/', function(req, res) {
@@ -30,6 +31,12 @@ app.get('/game', function(req, res) {
 //skicka posts om någon frågar efter /getPosts
 app.get('/getPosts', function(req, res) {
     res.send(posts);
+});
+
+
+app.get('/getScore', function(req, res) {
+    res.send(score);
+    console.log("från server", score);
 });
 
 //När någon försöker skicka en post till servern körs detta
@@ -54,6 +61,13 @@ app.post('/sendPost', function(req, res) {
     amounts.push(1);
     console.log("första i", amounts);
   }
+})
+
+app.post('/sendScoreData', function(highScore) {
+  //titta i terminalen vad som skickades, hämta ut rätt info och stoppa in i din databas(arrayen)
+  console.log("Från sever sendScoreData",highScore.body);
+  score = highScore.body.push(score);
+  console.log(score);
 })
 
 app.get('/elin', function(req, res) {
