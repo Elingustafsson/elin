@@ -6,15 +6,6 @@
     <link rel="stylesheet" href="snakeGame.css">
   </head>
   <body>
-    <!-- <div class="valMap">
-      <p>Storlek på spelplan</p>
-      <select onchange="changeMap()" id="map">
-        <option value="default">Välj</option>
-        <option value="small">Liten</option>
-        <option value="medium">Mellan</option>
-        <option value="large">Stor</option>
-      </select>
-    </div> -->
     <div class="map" id="tableContainer"></div>
     <div class="valDifficulty">
       <p>Välj svårighetsgrad</p>
@@ -29,13 +20,14 @@
     </div>
     <div class="highScore">
       <h3 id='display'>Din poäng: 0</h3>
-      <h3 id="elin">HIGH SCORE: 0</h3>
+      <h3 id="elin"></h3>
     </div>
     <div>
-      <form onchange="saveName()">
-        Namn:<input id="inputName" type="text" name="name">
-        <input type="button" value="Submit">
-      </form>
+      <input class="name"
+        id="name"
+        type="text"
+        name="post"
+        placeholder="Ditt namn"/>
       <p id="yourName"></p>
     </div>
   </body>

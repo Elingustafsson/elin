@@ -11,13 +11,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-
-//DETTA ÄR DET DU BEHÖVER BRY DIG OM
-//HÄR ÄR DIN DATABAS JUST NU
 var posts = [];
 var dates = ['2018/1/3', '2018/2/8', '2018/4/9'];
 var amounts = [3,4,1];
-var score = [];
+var highScore = [];
 
 //skicka index.html om någon frågar efter /
 app.get('/', function(req, res) {
@@ -33,13 +30,17 @@ app.get('/getPosts', function(req, res) {
     res.send(posts);
 });
 
-
 app.get('/getScore', function(req, res) {
-    res.send(score);
-    console.log("från server", score);
+    res.send(highScore);
+    //Detta skickas när någon går in eller uppdaterar /game..
 });
 
-//När någon försöker skicka en post till servern körs detta
+//Denna kod körs när klienten gör en post request till /sendScoreData
+app.post('/sendScoreData', function(req, res) {
+  highScore.push(req.body);
+  console.log(highScore);
+});
+
 app.post('/sendPost', function(req, res) {
   //titta i terminalen vad som skickades, hämta ut rätt info och stoppa in i din databas(arrayen)
   console.log(req.body);
@@ -63,22 +64,13 @@ app.post('/sendPost', function(req, res) {
   }
 })
 
-app.post('/sendScoreData', function(highScore) {
-  //titta i terminalen vad som skickades, hämta ut rätt info och stoppa in i din databas(arrayen)
-  console.log("Från sever sendScoreData",highScore.body);
-  score = highScore.body.push(score);
-  console.log(score);
-})
-
 app.get('/elin', function(req, res) {
   res.send("Hej elin");
 })
-
 
 app.listen(port, (err) => {
   if (err) {
     return console.log('something bad happened', err)
   }
-
   console.log(`server is listening on ${port}`)
 })

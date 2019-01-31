@@ -1,27 +1,31 @@
-getData();
+getHighScore();
 
-function getData() {
+function getHighScore() {
   var request = new XMLHttpRequest();
   //Skicka en getrequest till /getScore, jag har definerat denna route i server.js
   request.open("GET", '/getScore');
   request.send();
 
-  //DETTA ÄR DET DU BEHÖVER BRY DIG OM
-  //denna funktion körs när servern har svarat, och svaret hamnar i request.response;
   request.onload = function(e) {
     var response = request.response;
-
+    var scores = JSON.parse(response);
+    document.getElementById("elin").innerHTML = "";
+    for(var i = 0; i < scores.length; i++){
+      console.log("teeete",scores);
+      var test = scores[i].score;
+      var createElement = document.createElement("p");
+      createElement.innerHTML = "High Score : " + test;
+      document.getElementById("elin").append(createElement);
+    }
   }
 }
 
-function sendScore(highScore) {
-  console.log("från sendScore", highScore);
-var request2 = new XMLHttpRequest();
-request2.open("POST", '/sendScoreData');
-request2.setRequestHeader("Content-Type", "application/json");
-//VI KAN BARA SKICKA STRINGS, SÅ GÖR OM OBJEKTET TILL EN STRING, OCH SKICKA ÖVER STRINGEN
-//HÄMTA RÄTT INFO och skicka till SERVERN
-request2.send(JSON.stringify(highScore));
+function sendScore(score) {
+  var request2 = new XMLHttpRequest();
+  request2.open("POST", '/sendScoreData');
+  request2.setRequestHeader("Content-Type", "application/json");
+  var scoreObj = {score: score}
+  request2.send(JSON.stringify(scoreObj));
 }
 
 
@@ -32,41 +36,16 @@ var positions = [];
 var currentFood;
 var tid = 200;
 var score = 0;
-var highScore = [];
-var name = "";
-var nameHighScore = [];
 
 
 createTable(dimension);
 initialize(dimension);
-
-function saveName() {
-  var inputName = document.getElementById('inputName').value
-    name = inputName;
-    console.log("hej", name);
-    document.getElementById('yourName').innerHTML = "Hej " + name;
-}
 
 function changeTime() {
   let time = document.getElementById('hej').value
     tid = Number(time);
 }
 
-// function changeMap() {
-//   let mapSize = document.getElementById('map').value
-//   switch (mapSize) {
-//     case 'small':
-//       dimension = 5;
-//       console.log("lal");
-//       break;
-//     case 'medium':
-//       dimension = 10;
-//       break;
-//     case 'large':
-//       dimension = 15;
-//       break;
-//   }
-// }
 
 document.onkeydown = function(e) {
   if ((e.key === "ArrowUp")
@@ -109,19 +88,12 @@ function placeFood() {
 }
 
 function resetGame() {
-  highScore.push(score);
-  highScore.sort(function(a, b) {
-  return b - a;
-  });
-  console.log("ey", highScore);
-  document.getElementById("elin").innerHTML = "HIGH SCORE: " + highScore[0];
-
   clearInterval(timer);
   gameOn = false;
   var food = document.getElementById("cell" + currentFood.x + currentFood.y);
   food.style.backgroundColor = 'white';
   initialize(dimension)
-  sendScore(highScore)
+  sendScore(score)
 }
 
 function checkIfLose() {
