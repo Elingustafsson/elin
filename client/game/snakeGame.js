@@ -9,22 +9,28 @@ function getHighScore() {
   request.onload = function(e) {
     var response = request.response;
     var scores = JSON.parse(response);
-    document.getElementById("elin").innerHTML = "";
-    for(var i = 0; i < scores.length; i++){
-      console.log("teeete",scores);
-      var test = scores[i].score;
-      var createElement = document.createElement("p");
-      createElement.innerHTML = "High Score : " + test;
-      document.getElementById("elin").append(createElement);
+    if(scores.length >= 1){
+      var highScore = scores[0].score;
+      document.getElementById("elin").innerHTML = "";
+      var skapaH1 = document.createElement("h1");
+      skapaH1.innerHTML = "high score : " + scores[0].name + highScore;
+      //Använda map??
+      document.getElementById('elin').append(skapaH1);
+      for(var i = 1; (i < scores.length && i <= 5); i++){
+        var test = scores[i];
+        var createPelement = document.createElement("p");
+        createPelement.innerHTML = "Plats " + [i+1] + " poäng : " + test.score + test.name;
+        document.getElementById("elin").append(createPelement);
+      }
     }
   }
 }
 
-function sendScore(score) {
+function sendScore(score, name) {
   var request2 = new XMLHttpRequest();
   request2.open("POST", '/sendScoreData');
   request2.setRequestHeader("Content-Type", "application/json");
-  var scoreObj = {score: score}
+  var scoreObj = {score: score, name: name}
   request2.send(JSON.stringify(scoreObj));
 }
 
@@ -36,6 +42,7 @@ var positions = [];
 var currentFood;
 var tid = 200;
 var score = 0;
+var name = "";
 
 
 createTable(dimension);
@@ -93,7 +100,9 @@ function resetGame() {
   var food = document.getElementById("cell" + currentFood.x + currentFood.y);
   food.style.backgroundColor = 'white';
   initialize(dimension)
-  sendScore(score)
+  sendScore(score, name)
+  getHighScore()
+  score = 0;
 }
 
 function checkIfLose() {
@@ -138,13 +147,19 @@ function initialize(dimension) {
   placeFood()
 }
 
+function collectStuff() {
+  score = positions.length;
+  var selectName = document.getElementById('name');
+  var nameValue = selectName.value;
+  name = nameValue;
+  document.getElementById("display").innerHTML = "Din poäng: " + score;
+}
 
 function timeFunction() {
   var head = Object.assign({}, positions[0]);
   if (positions[0].x === currentFood.x && positions[0].y === currentFood.y) {
     placeFood()
-    score = positions.length;
-    document.getElementById("display").innerHTML = "Din poäng: " + score;
+    collectStuff()
   } else {
     svans = positions.pop()
     document.getElementById("cell" + svans.x + svans.y).style.backgroundColor = 'white';
