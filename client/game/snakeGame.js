@@ -9,17 +9,16 @@ function getHighScore() {
   request.onload = function(e) {
     var response = request.response;
     var scores = JSON.parse(response);
-    if(scores.length >= 1){
-      var highScore = scores[0].score;
-      document.getElementById("elin").innerHTML = "";
-      var skapaH1 = document.createElement("h1");
-      skapaH1.innerHTML = "high score : " + scores[0].name + highScore;
-      //Använda map??
-      document.getElementById('elin').append(skapaH1);
-      for(var i = 1; (i < scores.length && i <= 5); i++){
-        var test = scores[i];
+
+    for (var i = 0; i < scores.length && i<= 4; i++) {
+      if (i === 0) {
+        document.getElementById("elin").innerHTML = "";
+        var skapaH1 = document.createElement("h1");
+        skapaH1.innerHTML = "high score : " + scores[i].score + scores[i].name;
+        document.getElementById('elin').append(skapaH1);
+      } else {
         var createPelement = document.createElement("p");
-        createPelement.innerHTML = "Plats " + [i+1] + " poäng : " + test.score + test.name;
+        createPelement.innerHTML = "Plats " + (i+1) + " poäng : " + scores[i].score + scores[i].name;
         document.getElementById("elin").append(createPelement);
       }
     }

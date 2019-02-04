@@ -36,15 +36,14 @@ app.get('/getScore', function(req, res) {
 });
 
 //Denna kod körs när klienten gör en post request till /sendScoreData
-//Den krashar efter en stund : Failed to load resource: net::ERR_EMPTY_RESPONSE
 app.post('/sendScoreData', function(req, res) {
-  console.log("detta kommer in", req.body);
   highScore.push(req.body);
   highScore.sort(function(a, b) {
     return b.score - a.score;
-    //Denna funkar. Gör om senare till forEach för bättre koll
+    //Denna funkar. Gör om senare till forEach/for för bättre koll
   });
   console.log("should be sort",highScore);
+  res.end()
 });
 
 app.post('/sendPost', function(req, res) {
