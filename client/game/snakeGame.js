@@ -10,17 +10,18 @@ function getHighScore() {
     var response = request.response;
     var scores = JSON.parse(response);
 
-    for (var i = 0; i < scores.length && i<= 4; i++) {
+    for (var i = 0; (i < scores.length && i <= 4); i++) {
+      var element = null;
+      var elin = document.getElementById("elin");
       if (i === 0) {
         document.getElementById("elin").innerHTML = "";
-        var skapaH1 = document.createElement("h1");
-        skapaH1.innerHTML = "high score : " + scores[i].score + scores[i].name;
-        document.getElementById('elin').append(skapaH1);
+        element = document.createElement("h1")
+        element.innerHTML = "high score : " + scores[i].score + scores[i].name;
       } else {
-        var createPelement = document.createElement("p");
-        createPelement.innerHTML = "Plats " + (i+1) + " poäng : " + scores[i].score + scores[i].name;
-        document.getElementById("elin").append(createPelement);
+        element = document.createElement("p");
+        element.innerHTML = "Plats " + (i+1) + " poäng : " + scores[i].score + scores[i].name;
       }
+        elin.append(element);
     }
   }
 }

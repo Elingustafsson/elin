@@ -21,6 +21,10 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+app.get('/guestbook', function(req, res) {
+    res.sendFile(path.join(__dirname + 'client/guestbook/index.html'));
+});
+
 app.get('/game', function(req, res) {
     res.sendFile(path.join(__dirname + '/client/game/snakeGame.html'));
 });

@@ -1,75 +1,90 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
+html {
+  box-sizing: border-box;
+  font-family: 'helvetica neue';
+  font-size: 20px;
+  font-weight: 200;
+}
+body {
+  margin: 0;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
-h1 {
+.panels {
+  min-height: 300px;
+  overflow: hidden;
+  display: flex;
+}
+
+.panel {
+  background: #6B0F9C;
+  box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.1);
+  color: white;
   text-align: center;
+  align-items: center;
+    transition:
+    font-size 0.7s cubic-bezier(0.61,-0.19, 0.7, -0.11),
+    flex 0.7s cubic-bezier(0.61,-0.19, 0.7, -0.11),
+    background 0.2s;
+  font-size: cover;
+  background-position: center;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
-h3 {
-  margin-bottom: 4px;
+.panel2 {
+  background-color: red;
+  /* background-image: url("img2.jpg"); */
+}
+.panel3 {
+  background-color: green;
+  /* background-image: url("img3.jpg"); */
+}
+.panel4 {
+  background-color: pink;
+  /* background-image: url("img4.jpg"); */
 }
 
-#data > p {
-  border-bottom: 0.5px solid grey;
-  margin-top: 5px;
-  line-height: 20px;
-}
-
-#data > p::first-line {
-  color: grey;
-  font-style: oblique;
-  line-height: 30px;
-}
-
-.bodyFlex{
+.panel > * {
+  margin: 0;
+  width: 100%;
+  transition.transform 0.5s;
+  flex: 1 0 auto;
   display: flex;
   justify-content: center;
-  align-content: stretch;
-  align-items: stretch;
-  background-image: url("bg.png");
+  aligne-items: center;
 }
 
-.Main {
-  font-family: 'Montserrat', sans-serif;
-  min-height: 500px;
-  background-color: rgba(255,255,255,0.4);
-  width: 32%;
+.panel > *:first-child {
+  transform: translateY(-100%);
+}
+.panel.open-active > *:first-child {
+  transform: translateY(0);
 }
 
-.textField {
-  width: 95%;
-  height: 110px;
-  font-family: 'Montserrat', sans-serif;
+.panel > *:last-child {
+  transform: translateY(100%);
+}
+.panel.open-active > *:last-child {
+  transform: translateY(0);
 }
 
-.author {
-  font-family: 'Montserrat', sans-serif;
-  margin-top: 5px;
-  margin-bottom: 10px;
+.panel p {
+  text-transform: uppercase;
+  font-family: 'Amatic SC', cursive;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0,0,0, 0.45);
+  font-size: 1em;
 }
 
-.submitButton {
-  padding: 5px;
-  font-family: 'Montserrat', sans-serif;
-  border-radius: 2px;
-  background-color: pink;
-  border: 1px solid pink;
-  cursor: pointer;
+.panel p:nth-child(2) {
+  font-size: 2em;
 }
 
-.output {
-  margin-top: 10%;
-}
-
-path {
-    stroke: steelblue;
-    stroke-width: 2;
-    fill: none;
-}
-
-.axis path,
-.axis line {
-    fill: none;
-    stroke: grey;
-    stroke-width: 1;
-    shape-rendering: crispEdges;
+.panel.open {
+  flex: 5;
+  font-size: 40px;
 }
