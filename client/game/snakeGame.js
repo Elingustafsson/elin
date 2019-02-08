@@ -2,7 +2,6 @@ getHighScore();
 
 function getHighScore() {
   var request = new XMLHttpRequest();
-  //Skicka en getrequest till /getScore, jag har definerat denna route i server.js
   request.open("GET", '/getScore');
   request.send();
 
@@ -16,10 +15,10 @@ function getHighScore() {
       if (i === 0) {
         document.getElementById("elin").innerHTML = "";
         element = document.createElement("h1")
-        element.innerHTML = "high score : " + scores[i].score + scores[i].name;
+        element.innerHTML = "High score: " + scores[i].score + " " + scores[i].name;
       } else {
         element = document.createElement("p");
-        element.innerHTML = "Plats " + (i+1) + " poäng : " + scores[i].score + scores[i].name;
+        element.innerHTML = "Plats " + (i+1) + " poäng: " + scores[i].score + " " + scores[i].name;
       }
         elin.append(element);
     }
@@ -164,6 +163,7 @@ function timeFunction() {
     svans = positions.pop()
     document.getElementById("cell" + svans.x + svans.y).style.backgroundColor = 'white';
   }
+
   switch(direction) {
     case "ArrowUp":
       positions.unshift({x:head.x-1, y:head.y})

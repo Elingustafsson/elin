@@ -6,30 +6,33 @@
     <link rel="stylesheet" href="snakeGame.css">
   </head>
   <body>
-    <div class="map" id="tableContainer"></div>
-    <div class="valDifficulty">
-      <p>Välj svårighetsgrad</p>
-      <select onchange="changeTime()" id="hej">
-        <option value="default">Välj</option>
-        <option value="400">Superlätt</option>
-        <option value="250">Lätt</option>
-        <option value="150">Mellan</option>
-        <option value="85">Svårt</option>
-        <option value="40">Omöjligt</option>
-      </select>
-    </div>
-    <div class="highScore">
+    <div class="map" id="tableContainer">
       <h3 id='display'>Din poäng: 0</h3>
-      <h3 id="elin"></h3>
     </div>
     <div>
-      <h3>Skriv ditt namn och skicka in din poäng</h3>
-      <input class="name"
-        id="name"
-        type="text"
-        name="post"
-        placeholder="Ditt namn"/>
-      <p id="yourName"></p>
+      <div class="inputName">
+        <h3>Skriv ditt namn</h3>
+        <input class="name"
+          id="name"
+          type="text"
+          name="post"
+          placeholder="Ditt namn"/>
+        <p id="yourName"></p>
+      </div>
+      <div class="valDifficulty">
+        <h3>Välj svårighetsgrad</h3>
+        <select onchange="changeTime()" id="hej">
+          <option value="default">Välj</option>
+          <option value="400">Superlätt</option>
+          <option value="250">Lätt</option>
+          <option value="150">Mellan</option>
+          <option value="85">Svårt</option>
+          <option value="40">Omöjligt</option>
+        </select>
+      </div>
+    </div>
+    <div class="highScore">
+      <h3 id="elin"></h3>
     </div>
   </body>
   <script src="snakeGame.js" type="text/javascript"></script>

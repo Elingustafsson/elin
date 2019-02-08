@@ -44,7 +44,6 @@ app.post('/sendScoreData', function(req, res) {
   highScore.push(req.body);
   highScore.sort(function(a, b) {
     return b.score - a.score;
-    //Denna funkar. Gör om senare till forEach/for för bättre koll
   });
   console.log("should be sort",highScore);
   res.end()

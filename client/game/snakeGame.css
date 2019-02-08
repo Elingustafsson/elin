@@ -1,13 +1,30 @@
-table {
-  border: solid black 2px;
+body {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: monospace;
+}
+body table {
+  border: solid grey 2px;
   border-spacing: 0;
 }
-
-td {
+body table td {
   width: 40px;
   height: 40px;
 }
 
-body {
-  display: flex;
+.inputName {
+  margin: 0 10px 10px 10px;
 }
+.inputName input {
+  max-width: 150px;
+}
+
+.valDifficulty {
+  margin: 0 10px;
+}
+
+.highScore {
+  margin: 0 10px 10px 20px;
+}
+
+/*# sourceMappingURL=snakeGame.css.map */

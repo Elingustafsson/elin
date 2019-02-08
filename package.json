@@ -1,0 +1,26 @@
+{
+  "name": "elin",
+  "version": "1.0.0",
+  "description": "kör: <br>\r node server.js <br>\r Sedan in på localhost:3000",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "node-sass": "^4.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "sass": "sass client/game/snakeGame.scss client/game/snakeGame.css --watch",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elingustafsson/elin.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Elingustafsson/elin/issues"
+  },
+  "homepage": "https://github.com/Elingustafsson/elin#readme"
+}
